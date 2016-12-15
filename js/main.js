@@ -1,3 +1,7 @@
+function equals(a, b) {
+	JSON.stringify(a) === JSON.stringify(b)
+}
+
 // define classes
 
 // Point
@@ -6,12 +10,30 @@ function Point(x,y) {
 	this.y=y
 }
 
+Point.prototype.move = function(m) {
+	var res = new Point()
+
+	res.x = this.x+m.x
+	res.y = this.y+m.y
+
+	return res
+}
+
 // Move
-move = [[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1],[-1,2]]
+Move = [{x:1,y:2},{x:2,y:1},{x:2,y:-1},{x:1,y:-2},{x:-1,y:-2},{x:-2,y:-1},{x:-2,y:1},{x:-1,y:2}]
+
+function randomMove() {
+	var m = Math.floor(Math.random() * 8)
+	return Move[m]
+}
 
 // Route (solution)
 function Route() {
 	this.moves=[]
+}
+
+Route.prototype.addMove = function(m) {
+	this.moves.push(m)
 }
 
 // Problem
@@ -24,13 +46,17 @@ function Problem(start_pt,arr_pt) {
 Problem.prototype.solve = function() {
 	//TODO: implement solve function
 	var route = new Route()
-	route.moves.push(move[0])
-	route.moves.push(move[1])
-	route.moves.push(move[2])
-	this.solutions.push(route)
-	route = new Route()
-	route.moves.push(move[3])
-	route.moves.push(move[4])
+	var solved = false
+	var C = this.start_pt
+
+	do {
+		var rmove = randomMove()
+		route.addMove(rmove)
+		C = C.move(rmove)
+		console.log(C)
+		solved = equals(this.arr_pt,C)
+	} while (!solved);
+
 	this.solutions.push(route)
 }
 
@@ -44,3 +70,16 @@ var p = new Problem(A,B)
 console.log(p)
 p.solve()
 console.log(p)
+p.solve()
+console.log(p)
+
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
+console.log(randomMove())
