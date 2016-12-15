@@ -3,28 +3,20 @@
 
 ### Corresponding French - English words from Class Diagram
 
-Déplacement = Move
+Class name:
+- Déplacement = Move
+- Chemin = Route
+- Problème = Problem
+- Case = Point
 
-Chemin = Route
+Enum
+- H (haut) = U (up)
+- D (droite) = R (right)
+- B (bas) = D (down)
+- G (gauche) = L (left)
 
-Problème = Problem
-
-Case = Point
-
-
-H (haut) = U (up)
-
-D (droite) = R (right)
-
-B (bas) = D (down)
-
-G (gauche) = L (left)
-
-
-solutions = solutions
-
-déplacements = moves
-
-pt_départ = start_pt
-
-pt_arrivée = arr_pt
+Fields
+- solutions = solutions
+- déplacements = moves
+- pt_départ = start_pt
+- pt_arrivée = arr_pt
