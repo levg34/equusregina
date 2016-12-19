@@ -3,22 +3,30 @@ BOARD = {
 	y:7
 }
 
+// object A equals object B
 function equals(a, b) {
 	return JSON.stringify(a) === JSON.stringify(b)
+}
+
+// random integer between min and max (integer)
+function rand(min,max) {
+	return Math.floor(Math.random()*(max-min+1)+min)
 }
 
 // define classes
 
 // Move
-function Move() {
-	//
+function Move() {} // <-- do we need this ?
+
+Move.moves = [{x:1,y:2},{x:2,y:1},{x:2,y:-1},{x:1,y:-2},{x:-1,y:-2},{x:-2,y:-1},{x:-2,y:1},{x:-1,y:2}]
+
+Move.randomMove = function() {
+	var m = rand(0,7)
+	return Move.moves[m]
 }
 
-Move.prototype.moves = [{x:1,y:2},{x:2,y:1},{x:2,y:-1},{x:1,y:-2},{x:-1,y:-2},{x:-2,y:-1},{x:-2,y:1},{x:-1,y:2}]
-
-Move.prototype.randomMove = function() {
-	var m = Math.floor(Math.random() * 8)
-	return this.moves[m]
+Move.move = function(i) {
+	return Move.moves[i%8]
 }
 
 // Point
@@ -44,6 +52,18 @@ Point.prototype.move = function(m) {
 	return res
 }
 
+Point.prototype.possibleMoves = function() {
+	var pmoves = []
+	//for (var move in Move.moves) {
+	for (var i=0;i<Move.moves.length;++i) {
+		var move = Move.moves[i]
+		if (!equals(this.move(move),this)) {
+			pmoves.push(move)
+		}
+	}
+	return pmoves
+}
+
 Point.prototype.distance = function(b) {
 	return Math.sqrt(Math.pow(b.x-this.x,2)+Math.pow(b.y-this.y,2))
 }
@@ -67,19 +87,23 @@ function Problem(start_pt,arr_pt) {
 Problem.prototype.solve = function() {
 	//TODO: implement solve function
 	var route = new Route()
-	var solved = false
 	var C = this.start_pt
+	var visitedPoints = []
+	visitedPoints.push(C)
 
-	do {
-		var rmove = new Move().randomMove()
-		//if (!equals(C.move(rmove),C)) {
-			route.addMove(rmove)
-			C = C.move(rmove)
-		//}
-		solved = equals(this.arr_pt,C)
-	} while (!solved);
+	while (!equals(this.arr_pt,C)) {
+		var pmoves = C.possibleMoves()
+		// select a random move among the possible ones
+		var rmove = pmoves[rand(0,pmoves.length-1)]
+		route.addMove(rmove)
+		// place C after the move (move C)
+		C = C.move(rmove)
+		// add C to the list of visited points
+		visitedPoints.push(C)
+	}
 
 	this.solutions.push(route)
+	console.log(visitedPoints)
 }
 
 // use them
