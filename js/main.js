@@ -92,6 +92,7 @@ Problem.prototype.solve = function() {
 	visitedPoints.push(C)
 
 	while (!equals(this.arr_pt,C)) {
+		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		// select a random move among the possible ones
 		var rmove = pmoves[rand(0,pmoves.length-1)]
