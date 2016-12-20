@@ -54,8 +54,7 @@ Point.prototype.move = function(m) {
 
 Point.prototype.possibleMoves = function() {
 	var pmoves = []
-	//for (var move in Move.moves) {
-	for (var i=0;i<Move.moves.length;++i) {
+	for (var i in Move.moves) {
 		var move = Move.moves[i]
 		if (!equals(this.move(move),this)) {
 			pmoves.push(move)
