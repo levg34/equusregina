@@ -18,9 +18,12 @@ for (var i=0;i<BOARD.x;++i) {
     ctx.stroke()
 }
 
-var pointSize = 40
+var borderPSX = baseX/10
+var borderPSY = baseY/10
+var pointSizeX = baseX-borderPSX
+var pointSizeY = baseY-borderPSY
 function drawPoint(p) {
-    ctx.fillRect(5+baseX*p.x,5+baseY*p.y,pointSize,pointSize)
+    ctx.fillRect(borderPSX/2+baseX*p.x,borderPSY/2+baseY*p.y,pointSizeX,pointSizeY)
 }
 
 drawPoint(A)
