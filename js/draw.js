@@ -1,6 +1,7 @@
 // get canvas and context
 var c1 = document.getElementById('canvas1')
 var ctx = c1.getContext('2d')
+ctx.save()
 
 // draw horizontal lines
 var baseY = c1.height/(BOARD.y+1)
@@ -30,7 +31,6 @@ function drawPoint(p) {
 // draw possible points to wich we can move from point p, 
 // those points will be drawn in color color
 function drawPossibleMovesColor(p,color) {
-	ctx.save()
 	ctx.fillStyle=color
 	var pm = p.possibleMoves()
 	for (var i in pm) {
