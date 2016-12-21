@@ -92,22 +92,31 @@ function Problem(start_pt,arr_pt) {
 }
 
 Problem.prototype.solve = function() {
-	//TODO: implement solve function
 	var route = new Route()
 	var C = this.start_pt
 	var visitedPoints = []
 	visitedPoints.push(C)
+	
+	function hasVisited(p) {
+		var res = false
+		for (var i in visitedPoints) {
+			if (equals(visitedPoints[i],p)) {
+				res = true
+			}
+		}
+		return res
+	}
 
 	while (!equals(this.arr_pt,C)) {
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		// remove moves which lead to an already visited point
 		for (var i in pmoves) {
-			console.log(visitedPoints.indexOf(C.move(pmoves[i])))
-			if (visitedPoints.indexOf(C.move(pmoves[i]))!=-1) {
+			if (hasVisited(C.move(pmoves[i]))) {
 				pmoves.splice(i, 1)
 			}
 		}
+		console.log('pmoves.length = '+pmoves.length)
 		// select a random move among the possible ones
 		var rmove = pmoves[rand(0,pmoves.length-1)]
 		route.addMove(rmove)
