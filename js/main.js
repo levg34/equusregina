@@ -13,6 +13,14 @@ function rand(min,max) {
 	return Math.floor(Math.random()*(max-min+1)+min)
 }
 
+// remove value from Array
+Array.prototype.remove = function(e) {
+    var index = this.indexOf(e)
+	if (index > -1) {
+		this.splice(index, 1);
+	}
+}
+
 // define classes
 
 // Move
@@ -93,6 +101,12 @@ Problem.prototype.solve = function() {
 	while (!equals(this.arr_pt,C)) {
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
+		// remove moves which lead to an already visited point
+		for (var i in pmoves) {
+			if (C.move(pmoves[i])) {
+				pmoves.splice(i, 1)
+			}
+		}
 		// select a random move among the possible ones
 		var rmove = pmoves[rand(0,pmoves.length-1)]
 		route.addMove(rmove)
@@ -102,8 +116,9 @@ Problem.prototype.solve = function() {
 		visitedPoints.push(C)
 	}
 
-	this.solutions.push(route)
-	console.log(visitedPoints)
+//	if (equals(this.arr_pt,C)) {
+		this.solutions.push(route)
+//	}
 }
 
 // use them
