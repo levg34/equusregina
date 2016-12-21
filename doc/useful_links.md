@@ -8,3 +8,4 @@
 
 ## canvas
 - https://developer.mozilla.org/fr/docs/Tutoriel_canvas/Animations_basiques
+- http://simonsarris.com/blog/510-making-html5-canvas-useful
