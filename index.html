@@ -4,13 +4,21 @@
     <meta charset="utf-8">
     <title>ChessQ</title>
     <link rel="stylesheet" href="style/style.css">
-	  <script src="js/main.js"></script>
-    <script src="js/script.js"></script>
+	<script src="js/main.js"></script>
   </head>
   <body>
     <h1>ChessQ</h1>
     <h2>Board:</h2>
+	Tool: 
+	<select id="tool">
+	  <option value="none" selected>none</option>
+	  <option value="A">A (start)</option>
+	  <option value="B">B (finish)</option>
+	</select>
+	<button onclick="">Solve</button><br>
     <canvas id="canvas1" width="400" height="400" style="border:2px solid black;"></canvas>
     <script src="js/draw.js"></script>
+	
+	<script src="js/script.js"></script>
   </body>
 </html>
