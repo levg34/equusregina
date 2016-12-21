@@ -103,7 +103,8 @@ Problem.prototype.solve = function() {
 		var pmoves = C.possibleMoves()
 		// remove moves which lead to an already visited point
 		for (var i in pmoves) {
-			if (C.move(pmoves[i])) {
+			console.log(visitedPoints.indexOf(C.move(pmoves[i])))
+			if (visitedPoints.indexOf(C.move(pmoves[i]))!=-1) {
 				pmoves.splice(i, 1)
 			}
 		}
@@ -116,9 +117,11 @@ Problem.prototype.solve = function() {
 		visitedPoints.push(C)
 	}
 
-//	if (equals(this.arr_pt,C)) {
+	if (equals(this.arr_pt,C)) {
 		this.solutions.push(route)
-//	}
+		console.log(visitedPoints)
+		console.log(visitedPoints.length)
+	}
 }
 
 // use them
