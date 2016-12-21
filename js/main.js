@@ -14,10 +14,10 @@ function rand(min,max) {
 }
 
 // remove value from Array
-Array.prototype.remove = function(e) {
-    var index = this.indexOf(e)
+function removeFromArray(array,e) {
+    var index = array.indexOf(e)
 	if (index > -1) {
-		this.splice(index, 1);
+		array.splice(index, 1);
 	}
 }
 
@@ -111,12 +111,16 @@ Problem.prototype.solve = function() {
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		// remove moves which lead to an already visited point
-		for (var i in pmoves) {
+		/*for (var i in pmoves) {
 			if (hasVisited(C.move(pmoves[i]))) {
 				pmoves.splice(i, 1)
 			}
 		}
-		console.log('pmoves.length = '+pmoves.length)
+		
+		// if no move is possible without returning go back
+		if (pmoves.length==0) {
+			// TODO
+		}*/
 		// select a random move among the possible ones
 		var rmove = pmoves[rand(0,pmoves.length-1)]
 		route.addMove(rmove)
@@ -126,11 +130,9 @@ Problem.prototype.solve = function() {
 		visitedPoints.push(C)
 	}
 
-	if (equals(this.arr_pt,C)) {
-		this.solutions.push(route)
-		console.log(visitedPoints)
-		console.log(visitedPoints.length)
-	}
+	this.solutions.push(route)
+	console.log(visitedPoints)
+	console.log(visitedPoints.length)
 }
 
 // use them
