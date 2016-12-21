@@ -134,13 +134,3 @@ Problem.prototype.solve = function() {
 	console.log(visitedPoints)
 	console.log(visitedPoints.length)
 }
-
-// use them
-var A = new Point(2, 5)
-var B = new Point(7, 3)
-console.log(A)
-console.log(B)
-
-var p = new Problem(A,B)
-p.solve()
-console.log(p)

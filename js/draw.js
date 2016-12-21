@@ -21,10 +21,10 @@ for (var i=0;i<BOARD.x;++i) {
 // draw point function
 var borderPSX = baseX/10
 var borderPSY = baseY/10
-var pointSizeX = baseX-borderPSX
-var pointSizeY = baseY-borderPSY
+var pointSizeX = baseX-2*borderPSX
+var pointSizeY = baseY-2*borderPSY
 function drawPoint(p) {
-    ctx.fillRect(borderPSX/2+baseX*p.x,borderPSY/2+baseY*p.y,pointSizeX,pointSizeY)
+    ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
 }
 
 // draw possible points to wich we can move from point p, 
@@ -41,10 +41,3 @@ function drawPossibleMovesColor(p,color) {
 function drawPossibleMoves(p) {
     drawPossibleMovesColor(p,"#FF0000")
 }
-
-// use them
-drawPoint(A)
-drawPoint(B)
-
-drawPossibleMoves(A)
-drawPossibleMovesColor(B,"green")
