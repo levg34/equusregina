@@ -17,7 +17,7 @@ function rand(min,max) {
 function removeFromArray(array,e) {
 	var index = array.indexOf(e)
 	if (index > -1) {
-		array.splice(index, 1);
+		array.splice(index, 1)
 	}
 }
 
