@@ -13,8 +13,13 @@ function init() {
 	
 	// route from A to A
 	routeAA = new Route()
+	routeAA.addMove(Move.move(0))
+	routeAA.addMove(Move.move(4))
 	// route from A to B
 	routeAB = new Route()
+	routeAB.addMove() // TODO
+	routeAB.addMove()
+	routeAB.addMove()
 	
 	p = new Problem(A,B)
 }
@@ -53,7 +58,7 @@ function testProblemSolve() {
 	// calculate route and check final point for each solution (Route)
 	p.solve()
 	var sols = p.solutions
-	sols.length>0 // true
+	sols.length>0 // true else stop
 	for (var i in sols) {
 		var sol = sols[i]
 		var C = A.route(sol)
