@@ -63,7 +63,7 @@ Point.prototype.move = function(m) {
 Point.prototype.possibleMoves = function() {
 	var pmoves = []
 	for (var i in Move.moves) {
-		var move = Move.moves[i]
+		var move = Move.move(i)
 		if (!equals(this.move(move),this)) {
 			pmoves.push(move)
 		}
