@@ -12,3 +12,8 @@
 ## canvas
 - https://developer.mozilla.org/fr/docs/Tutoriel_canvas/Animations_basiques
 - http://simonsarris.com/blog/510-making-html5-canvas-useful
+- http://stackoverflow.com/questions/12625766/javascript-canvas-detect-click-on-shape
+
+## testing
+- http://chaijs.com/guide/installation/
+- https://nicolas.perriault.net/code/2013/testing-frontend-javascript-code-using-mocha-chai-and-sinon/
