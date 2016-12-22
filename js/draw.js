@@ -41,6 +41,7 @@ function drawPossibleMovesColor(p,color) {
 function drawPossibleMoves(p) {
 	drawPossibleMovesColor(p,"#FF0000")
 }
+
 function drawMove(p,move) {
 	//TODO
 }
