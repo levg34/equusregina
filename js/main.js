@@ -37,6 +37,19 @@ Move.move = function(i) {
 	return Move.moves[i%8]
 }
 
+// Route (solution)
+function Route() {
+	this.moves=[]
+}
+
+Route.prototype.addMove = function(m) {
+	this.moves.push(m)
+}
+
+Route.prototype.getMove = function(i) {
+	return this.moves[i]
+}
+
 // Point
 function Point(x,y) {
 	this.x=x
@@ -71,17 +84,18 @@ Point.prototype.possibleMoves = function() {
 	return pmoves
 }
 
+Point.prototype.route = function(r) {
+	var res = new Point(this.x,this.y)
+	
+	for (var i in r.moves) {
+		res = res.move(r.getMove(i))
+	}
+	
+	return res
+}
+
 Point.prototype.distance = function(b) {
 	return Math.sqrt(Math.pow(b.x-this.x,2)+Math.pow(b.y-this.y,2))
-}
-
-// Route (solution)
-function Route() {
-	this.moves=[]
-}
-
-Route.prototype.addMove = function(m) {
-	this.moves.push(m)
 }
 
 // Problem
