@@ -72,6 +72,44 @@ describe("equals()", function() {
 })
 
 describe("Point", function() {
+	describe("#inBoard", function() {
+		it("a point in board should be in board", function() {
+			assert(A.inBoard())
+		})
+		it("a point in board should be in board", function() {
+			assert(B.inBoard())
+		})
+		it("a point out of the board shoud not be in", function() {
+			var out = new Point(8,1)
+			assert(!out.inBoard())
+		})
+		it("a point out of the board shoud not be in", function() {
+			var out = new Point(1,-1)
+			assert(!out.inBoard())
+		})
+	})
+	describe("#move", function() {
+		it("new point corresponding to move", function() {
+			assert(equals(new Point(3,7),A.move(Move.move(0))))
+		})
+		it("new point corresponding to move", function() {
+			assert(equals(new Point(3,3),A.move(Move.move(3))))
+		})
+		it("new point corresponding to move", function() {
+			assert(equals(new Point(0,4),A.move(Move.move(5))))
+		})
+	})
+	describe("#possibleMoves", function() {
+		var pm
+		before(function() {
+			pm = A.possibleMoves()
+		})
+		it("all possible moves stay in board", function() {
+			for (var i in pm) {
+				assert(A.move(pm[i]).inBoard())
+			}
+		})
+	})
 	describe("#route", function() {
 		it("routeAA from A should lead to A", function() {
 			assert(equals(A,A.route(routeAA)))
@@ -86,6 +124,30 @@ describe("Point", function() {
 			assert(!equals(A,A.route(routeAB)))
 		})
 	})
+	describe("#distance", function() {
+		it("distance between A and A = 0", function() {
+			assert(A.distance(A)==0)
+		})
+		it("distance working", function() {
+			var C = new Point(2,0)
+			assert(A.distance(C)==5)
+		})
+		it("distance working", function() {
+			var C = new Point(5,5)
+			assert(A.distance(C)==3)
+		})
+	})
+})
+
+describe("Move", function() {
+	describe("#move", function() {
+		it("move(i) must return move n°i", function() {
+			assert(equals(Move.move(3),{x:1,y:-2}))
+		})
+		it("move(i) must work for i>moves.length", function() {
+			assert(equals(Move.move(12),{x:-1,y:-2}))
+		})
+	})
 })
 
 describe("Problem", function() {
@@ -94,7 +156,7 @@ describe("Problem", function() {
 		before(function() {
 			p.solve()
 			sols = p.solutions
-		});
+		})
 		it("there should be at least one solution", function() {
 			assert(sols.length>0)
 		})

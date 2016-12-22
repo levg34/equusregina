@@ -145,6 +145,6 @@ Problem.prototype.solve = function() {
 	}
 
 	this.solutions.push(route)
-	console.log(visitedPoints)
-	console.log(visitedPoints.length)
+	//console.log(visitedPoints)
+	//console.log(visitedPoints.length)
 }
