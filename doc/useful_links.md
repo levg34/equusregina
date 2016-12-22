@@ -17,3 +17,4 @@
 ## testing
 - http://chaijs.com/guide/installation/
 - https://nicolas.perriault.net/code/2013/testing-frontend-javascript-code-using-mocha-chai-and-sinon/
+- http://gotwarlost.github.io/istanbul/ for code coverage
