@@ -10,15 +10,15 @@
     <h1>ChessQ</h1>
     <h2>Board:</h2>
     Tool: 
-    <select id="tool">
+    <select id="tool" onchange="changeTool()">
       <option value="none" selected>none</option>
       <option value="A">A (start)</option>
       <option value="B">B (finish)</option>
     </select>
-    <button onclick="">Solve</button><br>
+    <button id="solve" onclick="clickSolve()" disabled>Solve</button><span id="bs" hidden> - Best solution: </span><span id="nbMinMoves"></span><br>
     <canvas id="canvas1" width="400" height="400" style="border:2px solid black;"></canvas>
     <script src="js/draw.js"></script>
-    
+    <div id="solutions"></div>
     <script src="js/script.js"></script>
   </body>
 </html>

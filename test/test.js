@@ -21,146 +21,146 @@ function init() {
 	p = new Problem(A,B)
 }
 
-describe("equals()", function() {
-	describe("Objects", function() {
-		it("equal objects should be equal", function() {
+describe('equals()', function() {
+	describe('Objects', function() {
+		it('equal objects should be equal', function() {
 			assert(equals({a:'a',b:'b'},{a:'a',b:'b'}))
 		})
-		it("different objects should NOT be equal", function() {
+		it('different objects should NOT be equal', function() {
 			assert(!equals({a:'a',b:'b'},{a:'a',b:'c'}))
 		})
-		it("different objects should NOT be equal", function() {
+		it('different objects should NOT be equal', function() {
 			assert(!equals({a:'a',b:'b'},{a:'a',c:'b'}))
 		})
 	})
-	describe("Move", function() {
-		it("equal moves should be equal", function() {
+	describe('Move', function() {
+		it('equal moves should be equal', function() {
 			assert(equals(Move.move(3),Move.move(3)))
 		})
-		it("equal moves should be equal", function() {
+		it('equal moves should be equal', function() {
 			assert(equals(Move.move(3),{x:1,y:-2}))
 		})
-		it("different moves should NOT be equal", function() {
+		it('different moves should NOT be equal', function() {
 			assert(!equals(Move.move(2),Move.move(3)))
 		})
-		it("different moves should NOT be equal", function() {
+		it('different moves should NOT be equal', function() {
 			assert(!equals(Move.move(2),{x:-1,y:2}))
 		})
 	})
-	describe("Point", function() {
-		it("equal points should be equal", function() {
+	describe('Point', function() {
+		it('equal points should be equal', function() {
 			assert(equals(A,A))
 		})
-		it("equal points should be equal", function() {
+		it('equal points should be equal', function() {
 			assert(equals(A,new Point(2, 5)))
 		})
-		it("different points should NOT be equal", function() {
+		it('different points should NOT be equal', function() {
 			assert(!equals(A,B))
 		})
-		it("different points should NOT be equal", function() {
+		it('different points should NOT be equal', function() {
 			assert(!equals(A,new Point(7, 3)))
 		})
 	})
-	describe("Route", function() {
-		it("equal routes should be equal", function() {
+	describe('Route', function() {
+		it('equal routes should be equal', function() {
 			assert(equals(routeAA,routeAA))
 		})
-		it("different routes should NOT be equal", function() {
+		it('different routes should NOT be equal', function() {
 			assert(!equals(routeAA,routeAB))
 		})
 	})
 })
 
-describe("Point", function() {
-	describe("#inBoard", function() {
-		it("a point in board should be in board", function() {
+describe('Point', function() {
+	describe('#inBoard', function() {
+		it('a point in board should be in board', function() {
 			assert(A.inBoard())
 		})
-		it("a point in board should be in board", function() {
+		it('a point in board should be in board', function() {
 			assert(B.inBoard())
 		})
-		it("a point out of the board shoud not be in", function() {
+		it('a point out of the board shoud not be in', function() {
 			var out = new Point(8,1)
 			assert(!out.inBoard())
 		})
-		it("a point out of the board shoud not be in", function() {
+		it('a point out of the board shoud not be in', function() {
 			var out = new Point(1,-1)
 			assert(!out.inBoard())
 		})
 	})
-	describe("#move", function() {
-		it("new point corresponding to move", function() {
+	describe('#move', function() {
+		it('new point corresponding to move', function() {
 			assert(equals(new Point(3,7),A.move(Move.move(0))))
 		})
-		it("new point corresponding to move", function() {
+		it('new point corresponding to move', function() {
 			assert(equals(new Point(3,3),A.move(Move.move(3))))
 		})
-		it("new point corresponding to move", function() {
+		it('new point corresponding to move', function() {
 			assert(equals(new Point(0,4),A.move(Move.move(5))))
 		})
 	})
-	describe("#possibleMoves", function() {
+	describe('#possibleMoves', function() {
 		var pm
 		before(function() {
 			pm = A.possibleMoves()
 		})
-		it("all possible moves stay in board", function() {
+		it('all possible moves stay in board', function() {
 			for (var i in pm) {
 				assert(A.move(pm[i]).inBoard())
 			}
 		})
 	})
-	describe("#route", function() {
-		it("routeAA from A should lead to A", function() {
+	describe('#route', function() {
+		it('routeAA from A should lead to A', function() {
 			assert(equals(A,A.route(routeAA)))
 		})
-		it("routeAB from A should lead to B", function() {
+		it('routeAB from A should lead to B', function() {
 			assert(equals(B,A.route(routeAB)))
 		})
-		it("routeAA from A should NOT lead to B", function() {
+		it('routeAA from A should NOT lead to B', function() {
 			assert(!equals(B,A.route(routeAA)))
 		})
-		it("routeAB from A should NOT lead to A", function() {
+		it('routeAB from A should NOT lead to A', function() {
 			assert(!equals(A,A.route(routeAB)))
 		})
 	})
-	describe("#distance", function() {
-		it("distance between A and A = 0", function() {
+	describe('#distance', function() {
+		it('distance between A and A = 0', function() {
 			assert(A.distance(A)==0)
 		})
-		it("distance working", function() {
+		it('distance working', function() {
 			var C = new Point(2,0)
 			assert(A.distance(C)==5)
 		})
-		it("distance working", function() {
+		it('distance working', function() {
 			var C = new Point(5,5)
 			assert(A.distance(C)==3)
 		})
 	})
 })
 
-describe("Move", function() {
-	describe("#move", function() {
-		it("move(i) must return move n°i", function() {
+describe('Move', function() {
+	describe('#move', function() {
+		it('move(i) must return move n°i', function() {
 			assert(equals(Move.move(3),{x:1,y:-2}))
 		})
-		it("move(i) must work for i>moves.length", function() {
+		it('move(i) must work for i>moves.length', function() {
 			assert(equals(Move.move(12),{x:-1,y:-2}))
 		})
 	})
 })
 
-describe("Problem", function() {
-	describe("#solve", function() {
+describe('Problem', function() {
+	describe('#solve', function() {
 		var sols
 		before(function() {
 			p.solve()
 			sols = p.solutions
 		})
-		it("there should be at least one solution", function() {
+		it('there should be at least one solution', function() {
 			assert(sols.length>0)
 		})
-		it("all solutions should lead to B", function() {
+		it('all solutions should lead to B', function() {
 			for (var i in sols) {
 				var sol = sols[i]
 				var C = A.route(sol)

@@ -39,9 +39,5 @@ function drawPossibleMovesColor(p,color) {
 	ctx.restore()
 }
 function drawPossibleMoves(p) {
-	drawPossibleMovesColor(p,"#FF0000")
-}
-
-function drawMove(p,move) {
-	//TODO
+	drawPossibleMovesColor(p,'#FF0000')
 }
