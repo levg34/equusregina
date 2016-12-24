@@ -80,7 +80,7 @@ describe('Point', function() {
 			assert(B.inBoard())
 		})
 		it('a point out of the board shoud not be in', function() {
-			var out = new Point(8,1)
+			var out = new Point(BOARD.x+1,1)
 			assert(!out.inBoard())
 		})
 		it('a point out of the board shoud not be in', function() {

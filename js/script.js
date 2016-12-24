@@ -58,8 +58,12 @@ function changeSolution() {
 }
 
 function clickViewSolution() {
-	// TODO: view solutions on board
-	console.log(p.solutions[selectedSolution])
+	var smoves = p.solutions[selectedSolution].moves
+    var C = new Point(A.x,A.y)
+    for (var i in smoves) {
+	    drawMove(C,smoves[i])
+        C = C.move(smoves[i])
+    }
 }
 
 function getPos(el) {
