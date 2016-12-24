@@ -41,3 +41,9 @@ function drawPossibleMovesColor(p,color) {
 function drawPossibleMoves(p) {
 	drawPossibleMovesColor(p,'#FF0000')
 }
+
+function calcPointFromBoardClick(x, y) {
+	var resX = Math.floor((x-borderPSX)/baseX)
+	var resY = Math.floor((y-borderPSY)/baseY)
+	return new Point(resX,resY)
+}
