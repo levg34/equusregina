@@ -18,7 +18,12 @@
     <button id="solve" onclick="clickSolve()" disabled>Solve</button><span id="bs" hidden> - Best solution: </span><span id="nbMinMoves"></span><br>
     <canvas id="canvas1" width="400" height="400" style="border:2px solid black;"></canvas>
     <script src="js/draw.js"></script>
-    <div id="solutions"></div>
+    <div id="solutions" hidden>
+      <select id="solution" onchange="changeSolution()">
+        <!--<option value="test">test</option>-->
+      </select>
+      <button onclick="clickViewSolution()">View</button>
+    </div>
     <script src="js/script.js"></script>
   </body>
 </html>
