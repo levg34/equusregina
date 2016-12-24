@@ -4,6 +4,8 @@ var bestSolMoves = document.getElementById('nbMinMoves')
 var bs = document.getElementById('bs')
 var solutions = document.getElementById('solutions')
 var solution = document.getElementById('solution')
+var setup = true
+var selectedTool = 'none'
 var selectedSolution = 0
 
 var A
@@ -12,39 +14,24 @@ var p
 
 var readyToSolve = false
 
-function changeTool() {
-	var tool = toolOption.value
-	switch(tool) {
-		case 'A':
-			// TODO get click coordinates
-			A = new Point(2, 5)
-			drawPoint(A)
-			if (B) {
-				readyToSolve=true
-			}
-			break;
-		case 'B':
-			// TODO get click coordinates
-			B = new Point(7, 3)
-			drawPoint(B)
-			if (A) {
-				readyToSolve=true
-			}
-			break;
-		default:
-			// default
-	}
+function validateSetup() {
 	if (readyToSolve) {
 		toolOption.setAttribute('disabled','')
 		solveButton.removeAttribute('disabled')
 		p = new Problem(A,B)
-	} // not here
+		setup = false
+	}
+}
+
+function changeTool() {
+	selectedTool = toolOption.value
 }
 
 function clickSolve() {
 	solveButton.setAttribute('disabled','')
 	p.solve()
 	if (solveButton.innerText == 'Solve') {
+		setup = false
 		solveButton.innerText = 'Solve again'
 		bs.removeAttribute('hidden')
 		solutions.removeAttribute('hidden')
@@ -52,23 +39,18 @@ function clickSolve() {
 	solveButton.removeAttribute('disabled')
 	
 	var minMoves = p.solutions[0].moves.length
-	var indexMinMoves = 0
 	for (var i in p.solutions) {
 		if (p.solutions[i].moves.length<minMoves) {
 			minMoves=p.solutions[i].moves.length
-			indexMinMoves = i
 		}
 	}
 	bestSolMoves.innerText = minMoves
 	
 	// add solution to solutions view
-    var option = document.createElement('option')
-    option.value = p.solutions.length-1
-    option.text = 'solution in '+p.solutions[option.value].moves.length+' moves'
-    solution.add(option)
-
-	// auto-select best solution
-	solution.selectedIndex = indexMinMoves
+	var option = document.createElement('option')
+	option.value = p.solutions.length-1
+	option.text = 'solution in '+p.solutions[option.value].moves.length+' moves'
+	solution.add(option)
 }
 
 function changeSolution() {
@@ -77,5 +59,54 @@ function changeSolution() {
 
 function clickViewSolution() {
 	// TODO: view solutions on board
-    console.log(p.solutions[selectedSolution])
+	console.log(p.solutions[selectedSolution])
 }
+
+function getPos(el) {
+	// yay readability
+	for (var lx=0, ly=0;
+		 el != null;
+		 lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+	return {x: lx,y: ly};
+}
+
+function clickCanvas(e) {
+	var x = e.clientX
+	var y = e.clientY
+
+	var pos = getPos(c1)
+    x = x-pos.x
+    y = y-pos.y
+
+	if (setup) {
+		var tool = toolOption.value
+		switch(tool) {
+            case 'A':
+			    // TODO: be able to select A several times
+				if (!A) {
+					A = calcPointFromBoardClick(x,y)
+					drawPoint(A)
+				}
+				if (B) {
+					readyToSolve=true
+				}
+				break;
+			case 'B':
+                // TODO: be able to select B several times
+                if (!B) {
+                    B = calcPointFromBoardClick(x,y)
+                    drawPoint(B)
+                }
+				if (A) {
+					readyToSolve=true
+				}
+				break;
+			default:
+			    // default
+                console.log(calcPointFromBoardClick(x,y))
+		}
+		validateSetup()
+	}
+}
+
+c1.addEventListener("click", clickCanvas)
