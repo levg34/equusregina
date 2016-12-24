@@ -28,6 +28,18 @@ function drawPoint(p) {
 	ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
 }
 
+function drawPointColor(p,color) {
+    ctx.fillStyle=color
+    ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
+    ctx.restore()
+}
+
+function calcPointFromBoardClick(x, y) {
+    var resX = Math.floor((x-borderPSX)/baseX)
+    var resY = Math.floor((y-borderPSY)/baseY)
+    return new Point(resX,resY)
+}
+
 // draw possible points to wich we can move from point p, 
 // those points will be drawn in color color
 function drawPossibleMovesColor(p,color) {
@@ -42,8 +54,7 @@ function drawPossibleMoves(p) {
 	drawPossibleMovesColor(p,'#FF0000')
 }
 
-function calcPointFromBoardClick(x, y) {
-	var resX = Math.floor((x-borderPSX)/baseX)
-	var resY = Math.floor((y-borderPSY)/baseY)
-	return new Point(resX,resY)
+function drawMove(point,move) {
+	drawPointColor(point,'gray')
+	drawPointColor(point.move(move),'red')
 }
