@@ -124,17 +124,6 @@ Problem.prototype.solve = function() {
 	while (!equals(this.arr_pt,C)) {
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
-		// remove moves which lead to an already visited point
-		/*for (var i in pmoves) {
-			if (hasVisited(C.move(pmoves[i]))) {
-				pmoves.splice(i, 1)
-			}
-		}
-		
-		// if no move is possible without returning go back
-		if (pmoves.length==0) {
-			// TODO
-		}*/
 		// select a random move among the possible ones
 		var rmove = pmoves[rand(0,pmoves.length-1)]
 		route.addMove(rmove)
@@ -145,6 +134,4 @@ Problem.prototype.solve = function() {
 	}
 
 	this.solutions.push(route)
-	//console.log(visitedPoints)
-	//console.log(visitedPoints.length)
 }

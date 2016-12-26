@@ -86,7 +86,6 @@ function clickCanvas(e) {
 		var tool = toolOption.value
 		switch(tool) {
             case 'A':
-			    // TODO: be able to select A several times
 				if (!A) {
 					A = calcPointFromBoardClick(x,y)
 					drawPoint(A)
@@ -96,7 +95,6 @@ function clickCanvas(e) {
 				}
 				break;
 			case 'B':
-                // TODO: be able to select B several times
                 if (!B) {
                     B = calcPointFromBoardClick(x,y)
                     drawPoint(B)
