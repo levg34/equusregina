@@ -13,6 +13,7 @@
 - https://developer.mozilla.org/fr/docs/Tutoriel_canvas/Animations_basiques
 - http://simonsarris.com/blog/510-making-html5-canvas-useful
 - http://stackoverflow.com/questions/12625766/javascript-canvas-detect-click-on-shape
+- https://openclassrooms.com/courses/dynamisez-vos-sites-web-avec-javascript/l-element-canvas
 
 ## testing
 - http://chaijs.com/guide/installation/

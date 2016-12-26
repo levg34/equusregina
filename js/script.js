@@ -4,6 +4,8 @@ var bestSolMoves = document.getElementById('nbMinMoves')
 var bs = document.getElementById('bs')
 var solutions = document.getElementById('solutions')
 var solution = document.getElementById('solution')
+var viewSolutionsButton = document.getElementById('clickViewSolution')
+var showNextStepButton = document.getElementById('showNextStep')
 var setup = true
 var selectedTool = 'none'
 var selectedSolution = 0
@@ -53,17 +55,60 @@ function clickSolve() {
 	solution.add(option)
 }
 
+function resetBoard() {
+    for (var i=0;i<=BOARD.x;++i) {
+        for (var j=0;j<=BOARD.y;++j) {
+            deletePoint(new Point(i,j))
+        }
+    }
+    if (A) {
+        drawPoint(A)
+	}
+    if (B) {
+        drawPoint(B)
+	}
+    viewSolutionsButton.removeAttribute('disabled')
+    showNextStepButton.setAttribute('hidden','')
+}
+
 function changeSolution() {
 	selectedSolution = solution.value
+	// cleanup displayed solution
+    resetBoard();
+}
+
+function StateMove(step,C) {
+	this.step = 0
+	this.C = new Point(A.x,A.y)
+}
+
+// save progress of displaying move
+var stateMove
+
+function showNextStep() {
+	smoves = p.solutions[selectedSolution].moves
+	var C = stateMove.C
+	var i = stateMove.step
+    drawMove(C, smoves[i])
+    if (equals(C,A)) {
+        drawPointColor(A, 'green')
+    }
+    stateMove.C = C.move(smoves[i])
+	if (i<smoves.length-1) {
+        ++stateMove.step
+	} else {
+		viewSolutionsButton.removeAttribute('disabled')
+		showNextStepButton.setAttribute('hidden','')
+	}
+
 }
 
 function clickViewSolution() {
-	var smoves = p.solutions[selectedSolution].moves
-    var C = new Point(A.x,A.y)
-    for (var i in smoves) {
-	    drawMove(C,smoves[i])
-        C = C.move(smoves[i])
-    }
+	resetBoard()
+	stateMove = new StateMove()
+	showNextStep()
+    viewSolutionsButton.setAttribute('disabled','')
+    showNextStepButton.removeAttribute('hidden')
 }
 
 function getPos(el) {

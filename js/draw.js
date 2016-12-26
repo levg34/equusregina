@@ -25,6 +25,7 @@ var borderPSY = baseY/10
 var pointSizeX = baseX-2*borderPSX
 var pointSizeY = baseY-2*borderPSY
 function drawPoint(p) {
+    ctx.fillStyle='black'
 	ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
 }
 
@@ -32,6 +33,10 @@ function drawPointColor(p,color) {
     ctx.fillStyle=color
     ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
     ctx.restore()
+}
+
+function deletePoint(p) {
+	ctx.clearRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
 }
 
 function calcPointFromBoardClick(x, y) {
