@@ -86,7 +86,7 @@ function StateMove(step,C) {
 var stateMove
 
 function showNextStep() {
-	smoves = p.solutions[selectedSolution].moves
+	var smoves = p.solutions[selectedSolution].moves
 	var C = stateMove.C
 	var i = stateMove.step
     drawMove(C, smoves[i])
@@ -107,8 +107,10 @@ function clickViewSolution() {
 	resetBoard()
 	stateMove = new StateMove()
 	showNextStep()
-    viewSolutionsButton.setAttribute('disabled','')
-    showNextStepButton.removeAttribute('hidden')
+	if (p.solutions[selectedSolution].moves.length>1) {
+		viewSolutionsButton.setAttribute('disabled','')
+		showNextStepButton.removeAttribute('hidden')
+	}
 }
 
 function getPos(el) {
