@@ -14,3 +14,6 @@ If you would like to run the master on your own computer, [clone](https://github
 - Then, select a solution below the board, and click ```View```. The first step will be displayed.
 - Click ```Next``` to see the next steps. When no more steps are to be displayed, this button disappears.
 - You can (optional) click on ```Solve again``` to add more solutions.
+
+### Class Diagram
+![alt text](https://github.com/levg34/chessq/blob/master/doc/class_diagram.png "Class Diagram")
