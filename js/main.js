@@ -1,3 +1,5 @@
+// global methods
+
 BOARD = {
 	x:7,
 	y:7
@@ -26,6 +28,7 @@ function removeFromArray(array,e) {
 // Move
 function Move() {} // <-- do we need this ?
 
+// all the possible moves
 Move.moves = [{x:1,y:2},{x:2,y:1},{x:2,y:-1},{x:1,y:-2},{x:-1,y:-2},{x:-2,y:-1},{x:-2,y:1},{x:-1,y:2}]
 
 Move.randomMove = function() {
