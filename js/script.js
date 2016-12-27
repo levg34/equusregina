@@ -56,25 +56,25 @@ function clickSolve() {
 }
 
 function resetBoard() {
-    for (var i=0;i<=BOARD.x;++i) {
-        for (var j=0;j<=BOARD.y;++j) {
-            deletePoint(new Point(i,j))
-        }
-    }
-    if (A) {
-        drawPoint(A)
+	for (var i=0;i<=BOARD.x;++i) {
+		for (var j=0;j<=BOARD.y;++j) {
+			deletePoint(new Point(i,j))
+		}
 	}
-    if (B) {
-        drawPoint(B)
+	if (A) {
+		drawPoint(A)
 	}
-    viewSolutionsButton.removeAttribute('disabled')
-    showNextStepButton.setAttribute('hidden','')
+	if (B) {
+		drawPoint(B)
+	}
+	viewSolutionsButton.removeAttribute('disabled')
+	showNextStepButton.setAttribute('hidden','')
 }
 
 function changeSolution() {
 	selectedSolution = solution.value
 	// cleanup displayed solution
-    resetBoard();
+	resetBoard();
 }
 
 function StateMove(step,C) {
@@ -89,13 +89,13 @@ function showNextStep() {
 	var smoves = p.solutions[selectedSolution].moves
 	var C = stateMove.C
 	var i = stateMove.step
-    drawMove(C, smoves[i])
-    if (equals(C,A)) {
-        drawPointColor(A, 'green')
-    }
-    stateMove.C = C.move(smoves[i])
+	drawMove(C, smoves[i])
+	if (equals(C,A)) {
+		drawPointColor(A, 'green')
+	}
+	stateMove.C = C.move(smoves[i])
 	if (i<smoves.length-1) {
-        ++stateMove.step
+		++stateMove.step
 	} else {
 		viewSolutionsButton.removeAttribute('disabled')
 		showNextStepButton.setAttribute('hidden','')
@@ -113,12 +113,9 @@ function clickViewSolution() {
 	}
 }
 
-function getPos(el) {
-	// yay readability
-	for (var lx=0, ly=0;
-		 el != null;
-		 lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
-	return {x: lx,y: ly};
+function getPos(elem) {
+	var screenPosition = elem.getBoundingClientRect()
+	return {x:screenPosition.left,y:screenPosition.top}
 }
 
 function clickCanvas(e) {
@@ -126,13 +123,13 @@ function clickCanvas(e) {
 	var y = e.clientY
 
 	var pos = getPos(c1)
-    x = x-pos.x
-    y = y-pos.y
+	x = x-pos.x
+	y = y-pos.y
 
 	if (setup) {
 		var tool = toolOption.value
 		switch(tool) {
-            case 'A':
+			case 'A':
 				if (!A) {
 					A = calcPointFromBoardClick(x,y)
 					drawPoint(A)
@@ -142,17 +139,17 @@ function clickCanvas(e) {
 				}
 				break;
 			case 'B':
-                if (!B) {
-                    B = calcPointFromBoardClick(x,y)
-                    drawPoint(B)
-                }
+				if (!B) {
+					B = calcPointFromBoardClick(x,y)
+					drawPoint(B)
+				}
 				if (A) {
 					readyToSolve=true
 				}
 				break;
 			default:
-			    // default
-                console.log(calcPointFromBoardClick(x,y))
+				// default
+				console.log(calcPointFromBoardClick(x,y))
 		}
 		validateSetup()
 	}
