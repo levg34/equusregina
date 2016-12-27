@@ -25,14 +25,14 @@ var borderPSY = baseY/10
 var pointSizeX = baseX-2*borderPSX
 var pointSizeY = baseY-2*borderPSY
 function drawPoint(p) {
-    ctx.fillStyle='black'
+	ctx.fillStyle='black'
 	ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
 }
 
 function drawPointColor(p,color) {
-    ctx.fillStyle=color
-    ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
-    ctx.restore()
+	ctx.fillStyle=color
+	ctx.fillRect(borderPSX+baseX*p.x,borderPSY+baseY*p.y,pointSizeX,pointSizeY)
+	ctx.restore()
 }
 
 function deletePoint(p) {
@@ -40,9 +40,9 @@ function deletePoint(p) {
 }
 
 function calcPointFromBoardClick(x, y) {
-    var resX = Math.floor((x-borderPSX)/baseX)
-    var resY = Math.floor((y-borderPSY)/baseY)
-    return new Point(resX,resY)
+	var resX = Math.floor((x-borderPSX)/baseX)
+	var resY = Math.floor((y-borderPSY)/baseY)
+	return new Point(resX,resY)
 }
 
 // draw possible points to wich we can move from point p, 
