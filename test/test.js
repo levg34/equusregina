@@ -161,10 +161,30 @@ describe('Problem', function() {
 			assert(sols.length>0)
 		})
 		it('all solutions should lead to B', function() {
+			for (var i=0;i<99;++i) {
+				p.solve()
+			}
 			for (var i in sols) {
 				var sol = sols[i]
 				var C = A.route(sol)
 				assert(equals(C,B))
+			}
+		})
+		it('all solutions should not go back', function() {
+			for (var i in sols) {
+				var sol = sols[i]
+				var C = A
+				var vp = []
+				vp.push(C)
+				for (var j in sol.moves) {
+					var move = sol.moves[j]
+					C = C.move(move)
+					vp.push(C)
+				}
+				// check
+				for (var i=2;i<vp.length;++i) {
+					assert(!equals(vp[i],vp[i-2]))
+				}
 			}
 		})
 	})
