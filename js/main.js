@@ -16,14 +16,6 @@ function rand(min,max) {
 	return Math.floor(Math.random()*(max-min+1)+min)
 }
 
-// remove value from Array
-function removeFromArray(array,e) {
-	var index = array.indexOf(e)
-	if (index > -1) {
-		array.splice(index, 1)
-	}
-}
-
 // define classes
 
 // Move
@@ -82,7 +74,7 @@ Point.prototype.move = function(m) {
 	return res
 }
 
-// return a list of possible moves from that poins
+// return a list of possible moves from that point
 Point.prototype.possibleMoves = function() {
 	var pmoves = []
 	for (var i in Move.moves) {
@@ -121,15 +113,27 @@ function Problem(start_pt,arr_pt) {
 Problem.prototype.solve = function() {
 	var route = new Route()
 	var C = this.start_pt
+	var visitedPoints = []
+	visitedPoints.push(C)
 
 	while (!equals(this.arr_pt,C)) {
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
+		// remove move if returns to previous position
+		if (visitedPoints.length>1) {
+			for (var i in pmoves){
+				var pm = pmoves[i]
+				if (equals(C.move(pm),visitedPoints[visitedPoints.length-2])) {
+					pmoves.splice(i,1)
+				}
+			}
+		}
 		// select a random move among the possible ones
 		var rmove = pmoves[rand(0,pmoves.length-1)]
 		route.addMove(rmove)
 		// place C after the move (move C)
 		C = C.move(rmove)
+		visitedPoints.push(C)
 	}
 
 	this.solutions.push(route)
