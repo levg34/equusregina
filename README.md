@@ -1,10 +1,10 @@
-# chessq
+# EquusRegina
 ## What are the possible moves with a horse to get from A to B ?
 
 ### Installation procedure
-The last release of ChessQ is running at https://levg34.github.io/chessq/
+The last release of EquusRegina is running at https://levg34.github.io/equusregina/
 
-If you would like to run the master on your own computer, [clone](https://github.com/levg34/chessq.git) or [download zip](https://github.com/levg34/chessq/archive/master.zip) of sources, then host or double click on ```chessq/index.html```.
+If you would like to run the master on your own computer, [clone](https://github.com/levg34/equusregina.git) or [download zip](https://github.com/levg34/equusregina/archive/master.zip) of sources, then host or double click on ```equusregina/index.html```.
 
 ### User Guide
 - Select the tool ```A (start)```, then click on the board to place this point.
@@ -16,4 +16,4 @@ If you would like to run the master on your own computer, [clone](https://github
 - You can (optional) click on ```Solve again``` to add more solutions.
 
 ### Class Diagram
-![alt text](https://github.com/levg34/chessq/blob/master/doc/class_diagram.png "Class Diagram")
+![alt text](https://github.com/levg34/equusregina/blob/master/doc/class_diagram.png "Class Diagram")
