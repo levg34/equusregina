@@ -19,3 +19,6 @@
 - http://chaijs.com/guide/installation/
 - https://nicolas.perriault.net/code/2013/testing-frontend-javascript-code-using-mocha-chai-and-sinon/
 - http://gotwarlost.github.io/istanbul/ for code coverage
+
+## others
+- https://la.wikipedia.org/wiki/Equus_(scacci)
