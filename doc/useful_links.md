@@ -22,3 +22,4 @@
 
 ## others
 - https://la.wikipedia.org/wiki/Equus_(scacci)
+- https://help.github.com/articles/changing-author-info/
