@@ -163,7 +163,8 @@ Problem.prototype.solve = function() {
     this.solutions.push(route)
 }
 
-Problem.prototype.solveAll = function() {
+// find all the solutions of depth n
+Problem.prototype.solveAll = function(n) {
 	// TODO: implement
 	// we need to fix a max depth
 }
