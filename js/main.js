@@ -18,6 +18,20 @@ function rand(min,max) {
 
 // define classes
 
+// A Queue object for queue-like functionality over JavaScript arrays.
+var Queue = function() {
+	this.items = []
+}
+Queue.prototype.enqueue = function(obj) {
+	this.items.push(obj)
+}
+Queue.prototype.dequeue = function() {
+	return this.items.shift()
+}
+Queue.prototype.isEmpty = function() {
+	return this.items.length === 0
+}
+
 // Move
 function Move() {} // <-- do we need this ?
 
@@ -109,12 +123,12 @@ function Problem(start_pt,arr_pt) {
 	this.solutions=[] // Route[]
 }
 
-// solve the problem, fill in this.solutions
-Problem.prototype.solve = function() {
+// solve the problem randomly, fill in this.solutions
+Problem.prototype.solveRandom = function() {
 	var route = new Route()
 	var C = this.start_pt
 	var visitedPoints = []
-	visitedPoints.push(C)
+    visitedPoints.push(C)
 
 	while (!equals(this.arr_pt,C)) {
 		// get all the possible moves
@@ -137,4 +151,19 @@ Problem.prototype.solve = function() {
 	}
 
 	this.solutions.push(route)
+}
+
+// find one of the shortest path to solve the problem
+Problem.prototype.solve = function() {
+    var route = new Route()
+    var C = this.start_pt
+
+	// TODO: implement
+
+    this.solutions.push(route)
+}
+
+Problem.prototype.solveAll = function() {
+	// TODO: implement
+	// we need to fix a max depth
 }
