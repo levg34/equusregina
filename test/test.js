@@ -137,6 +137,19 @@ describe('Point', function() {
 			assert(A.distance(C)==3)
 		})
 	})
+	describe('#diff', function() {
+		it('diff between A and A = (0,0)', function() {
+			assert(equals(A.diff(A),{x:0,y:0}))
+		})
+		it('diff working', function() {
+			var C = new Point(2,0)
+			assert(equals(A.diff(C),{x:0,y:5}))
+		})
+		it('diff working', function() {
+			var C = new Point(5,5)
+			assert(equals(A.diff(C),{x:-3,y:0}))
+		})
+	})
 })
 
 describe('Move', function() {
