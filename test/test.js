@@ -154,6 +154,7 @@ describe('Problem', function() {
 	describe('#solve', function() {
 		var sols
 		before(function() {
+			p = new Problem(A,B)
 			p.solve()
 			sols = p.solutions
 		})
@@ -161,8 +162,32 @@ describe('Problem', function() {
 			assert(sols.length>0)
 		})
 		it('all solutions should lead to B', function() {
+			for (var i in sols) {
+				var sol = sols[i]
+				var C = A.route(sol)
+				assert(equals(C,B))
+			}
+		})
+		it('optimum solution is 3 moves', function() {
+			for (var i in sols) {
+				var sol = sols[i]
+				assert(sol.moves.length<=3)
+			}
+		})
+	})
+	describe('#solveRandom', function() {
+		var sols
+		before(function() {
+			p = new Problem(A,B)
+			p.solveRandom()
+			sols = p.solutions
+		})
+		it('there should be at least one solution', function() {
+			assert(sols.length>0)
+		})
+		it('all solutions should lead to B', function() {
 			for (var i=0;i<99;++i) {
-				p.solve()
+				p.solveRandom()
 			}
 			for (var i in sols) {
 				var sol = sols[i]
