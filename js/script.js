@@ -30,8 +30,9 @@ function changeTool() {
 }
 
 function clickSolve() {
+	solveButton.setAttribute('hidden','')
 	solveButton.setAttribute('disabled','')
-	p.solveRandom()
+	p.solve()
 	if (solveButton.innerText == 'Solve') {
 		setup = false
 		solveButton.innerText = 'Solve again'
