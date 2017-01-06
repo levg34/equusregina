@@ -170,7 +170,7 @@ Problem.prototype.solve = function() {
 		for (var i in pmoves){
 			var pm = pmoves[i]
 			var D = C.move(pm)
-			if (!visitedPoints.filter(function(P){ return equals(P,D) })) {
+			if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
 				queue.enqueue(D)
 				visitedPoints.push(D)
 			}
