@@ -175,7 +175,7 @@ Problem.prototype.solve = function() {
     	var resC = queue.dequeue()
 		C = resC.point
 		var depth = resC.depth
-		pointsList[depth+1]=C
+		pointsList[depth]=C
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		for (var i in pmoves){
@@ -188,10 +188,9 @@ Problem.prototype.solve = function() {
 		}
 	}
 
-	console.log(pointsList)
-	/*for (var i=0;i<pointsList.length-1;++i) {
-    	route.addMove(pointsList[i+1].diff(pointsList[i]))
-	}*/
+	for (var i=0;i<pointsList.length-1;++i) {
+		route.addMove(pointsList[i+1].diff(pointsList[i]))
+	}
 
     this.solutions.push(route)
 }
