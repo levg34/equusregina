@@ -116,6 +116,13 @@ Point.prototype.distance = function(b) {
 	return Math.sqrt(Math.pow(b.x-this.x,2)+Math.pow(b.y-this.y,2))
 }
 
+// difference between two points
+Point.prototype.diff = function (b) {
+	var dx = this.x - b.x
+	var dy = this.y - b.y
+	return {x:dx,y:dy}
+}
+
 // Problem
 function Problem(start_pt,arr_pt) {
 	this.start_pt=start_pt
@@ -158,24 +165,33 @@ Problem.prototype.solve = function() {
     var route = new Route()
     var C = this.start_pt
 	var visitedPoints = []
-	var queue = new Queue();
-	queue.enqueue(C)
+	var queue = new Queue()
+	queue.enqueue({point:C,depth:0})
 	visitedPoints.push(C)
 
+	var pointsList = []
+
 	while (!queue.isEmpty()&&!equals(this.arr_pt,C)) {
-		C = queue.dequeue()
-		console.log(C)
+    	var resC = queue.dequeue()
+		C = resC.point
+		var depth = resC.depth
+		pointsList[depth+1]=C
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		for (var i in pmoves){
 			var pm = pmoves[i]
 			var D = C.move(pm)
 			if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
-				queue.enqueue(D)
+				queue.enqueue({point:D,depth:depth+1})
 				visitedPoints.push(D)
 			}
 		}
 	}
+
+	console.log(pointsList)
+	/*for (var i=0;i<pointsList.length-1;++i) {
+    	route.addMove(pointsList[i+1].diff(pointsList[i]))
+	}*/
 
     this.solutions.push(route)
 }

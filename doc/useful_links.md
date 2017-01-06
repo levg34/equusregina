@@ -5,6 +5,7 @@
 ## algorithm
 - https://en.wikipedia.org/wiki/Tabu_search
 - https://en.wikipedia.org/wiki/Breadth-first_search
+- https://code.tutsplus.com/articles/data-structures-with-javascript-tree--cms-23393
 
 ## gitflow
 - https://guides.github.com/features/issues/
