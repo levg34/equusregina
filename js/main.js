@@ -157,8 +157,25 @@ Problem.prototype.solveRandom = function() {
 Problem.prototype.solve = function() {
     var route = new Route()
     var C = this.start_pt
+	var visitedPoints = []
+	var queue = new Queue();
+	queue.enqueue(C)
+	visitedPoints.push(C)
 
-	// TODO: implement
+	while (!queue.isEmpty()&&!equals(this.arr_pt,C)) {
+		C = queue.dequeue()
+		console.log(C)
+		// get all the possible moves
+		var pmoves = C.possibleMoves()
+		for (var i in pmoves){
+			var pm = pmoves[i]
+			var D = C.move(pm)
+			if (!visitedPoints.filter(function(P){ return equals(P,D) })) {
+				queue.enqueue(D)
+				visitedPoints.push(D)
+			}
+		}
+	}
 
     this.solutions.push(route)
 }
