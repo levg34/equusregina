@@ -166,27 +166,41 @@ Problem.prototype.solve = function() {
     var C = this.start_pt
 	var visitedPoints = []
 	var queue = new Queue()
-	queue.enqueue({point:C,depth:0})
+	queue.enqueue({point:C})
 	visitedPoints.push(C)
 
-	var pointsList = []
+	var tree = new Tree(C)
 
 	while (!queue.isEmpty()&&!equals(this.arr_pt,C)) {
-    	var resC = queue.dequeue()
+		var resC = queue.dequeue()
 		C = resC.point
-		var depth = resC.depth
-		pointsList[depth]=C
+		if (resC.parent) {
+			tree.add(C,resC.parent,tree.traverseBF)
+		}
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		for (var i in pmoves){
 			var pm = pmoves[i]
 			var D = C.move(pm)
 			if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
-				queue.enqueue({point:D,depth:depth+1})
+				queue.enqueue({point:D,parent:C})
 				visitedPoints.push(D)
 			}
 		}
 	}
+
+	var leafB
+	tree.traverseBF(function(node){leafB=node})
+
+	var pointsList = []
+	pointsList.push(leafB.data)
+
+	while(leafB.parent) {
+		pointsList.push(leafB.parent.data)
+		leafB = leafB.parent
+	}
+
+	pointsList.reverse()
 
 	for (var i=0;i<pointsList.length-1;++i) {
 		route.addMove(pointsList[i+1].diff(pointsList[i]))
