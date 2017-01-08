@@ -11,7 +11,5 @@ function containsDuplicate(array) {
 		simplifiedLength++
 	}
 
-	console.log(obj)
-
 	return length!=simplifiedLength
 }
