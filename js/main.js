@@ -211,7 +211,6 @@ Problem.prototype.solve = function() {
 
 // find all the solutions of depth n
 Problem.prototype.solveAll = function(n) {
-	var route = new Route()
 	var C = this.start_pt
 	var visitedPoints = []
 	var queue = new Queue()
@@ -232,20 +231,24 @@ Problem.prototype.solveAll = function(n) {
 		}
 		if (equals(this.arr_pt,C)) {
 			solutionNodes.push(node)
-		}
-		// get all the possible moves
-		var pmoves = C.possibleMoves()
-		for (var i in pmoves){
-			var pm = pmoves[i]
-			var D = C.move(pm)
-			if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
-				queue.enqueue({point:D,parent:C,depth:depth+1})
-				if (!equals(D,this.arr_pt)) visitedPoints.push(D)
+		} else {
+			// get all the possible moves
+			var pmoves = C.possibleMoves()
+			for (var i in pmoves){
+				var pm = pmoves[i]
+				var D = C.move(pm)
+				if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
+					queue.enqueue({point:D,parent:C,depth:depth+1})
+					visitedPoints.push(D)
+				} else if (equals(D,this.arr_pt)) {
+					queue.enqueue({point:D,parent:C,depth:depth+1})
+				}
 			}
 		}
 	}
 
 	for (var i in solutionNodes) {
+		var route = new Route()
 		var leafB = solutionNodes[i]
 		var pointsList = []
 		pointsList.push(leafB.data)
