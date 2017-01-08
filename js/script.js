@@ -30,30 +30,32 @@ function changeTool() {
 }
 
 function clickSolve() {
-	//solveButton.setAttribute('hidden','')
 	solveButton.setAttribute('disabled','')
-	p.solve()
-	if (solveButton.innerText == 'Solve') {
-		setup = false
-		solveButton.innerText = 'Solve again'
-		bs.removeAttribute('hidden')
-		solutions.removeAttribute('hidden')
+	var newRes = p.solve()
+	console.log(newRes)
+	if (newRes) {
+		if (solveButton.innerText == 'Solve') {
+			setup = false
+			solveButton.innerText = 'Solve again'
+			bs.removeAttribute('hidden')
+			solutions.removeAttribute('hidden')
+		}
+
+		var minMoves = p.solutions[0].moves.length
+		for (var i in p.solutions) {
+			if (p.solutions[i].moves.length<minMoves) {
+				minMoves=p.solutions[i].moves.length
+			}
+		}
+		bestSolMoves.innerText = minMoves
+
+		// add solution to solutions view
+		var option = document.createElement('option')
+		option.value = p.solutions.length-1
+		option.text = 'solution in '+p.solutions[option.value].moves.length+' moves'
+		solution.add(option)
 	}
 	solveButton.removeAttribute('disabled')
-	
-	var minMoves = p.solutions[0].moves.length
-	for (var i in p.solutions) {
-		if (p.solutions[i].moves.length<minMoves) {
-			minMoves=p.solutions[i].moves.length
-		}
-	}
-	bestSolMoves.innerText = minMoves
-	
-	// add solution to solutions view
-	var option = document.createElement('option')
-	option.value = p.solutions.length-1
-	option.text = 'solution in '+p.solutions[option.value].moves.length+' moves'
-	solution.add(option)
 }
 
 function resetBoard() {

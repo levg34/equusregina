@@ -173,52 +173,70 @@ Problem.prototype.solveRandom = function() {
 
 // find one of the shortest path to solve the problem
 Problem.prototype.solve = function() {
-    var route = new Route()
-    var C = this.start_pt
+	var route = new Route()
+	var C = this.start_pt
 	var visitedPoints = []
 	var queue = new Queue()
-	queue.enqueue({point:C})
+	queue.enqueue({point: C})
 	visitedPoints.push(C)
 
 	var tree = new Tree(C)
 
-	while (!queue.isEmpty()&&!equals(this.arr_pt,C)) {
+	while (!queue.isEmpty() && !equals(this.arr_pt, C)) {
 		var resC = queue.dequeue()
 		C = resC.point
 		if (resC.parent) {
-			tree.add(C,resC.parent,tree.traverseBF)
+			tree.add(C, resC.parent, tree.traverseBF)
 		}
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
 		shuffle(pmoves)
-		for (var i in pmoves){
+		for (var i in pmoves) {
 			var pm = pmoves[i]
 			var D = C.move(pm)
-			if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
-				queue.enqueue({point:D,parent:C})
+			if (visitedPoints.filter(function (P) {
+					return equals(P, D)
+				}).length == 0) {
+				queue.enqueue({point: D, parent: C})
 				visitedPoints.push(D)
 			}
 		}
 	}
 
 	var leafB
-	tree.traverseBF(function(node){leafB=node})
+	tree.traverseBF(function (node) {
+		leafB = node
+	})
 
 	var pointsList = []
 	pointsList.push(leafB.data)
 
-	while(leafB.parent) {
+	while (leafB.parent) {
 		pointsList.push(leafB.parent.data)
 		leafB = leafB.parent
 	}
 
 	pointsList.reverse()
 
-	for (var i=0;i<pointsList.length-1;++i) {
-		route.addMove(pointsList[i+1].diff(pointsList[i]))
+	for (var i = 0; i < pointsList.length - 1; ++i) {
+		route.addMove(pointsList[i + 1].diff(pointsList[i]))
 	}
 
-    this.solutions.push(route)
+	var exists = false
+
+	this.solutions.forEach(function (e) {
+		console.log(e)
+		console.log(route)
+		if (equals(route,e)) {
+			exists = true
+		}
+	})
+
+	if (!exists) {
+		this.solutions.push(route)
+	}
+
+	return !exists
 }
 
 // find all the solutions of depth n
