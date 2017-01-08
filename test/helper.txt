@@ -1,6 +1,6 @@
-describe("", function() {
-	describe("", function() {
-		it("", function() {
+describe('', function() {
+	describe('', function() {
+		it('', function() {
 			assert()
 		})
 	})

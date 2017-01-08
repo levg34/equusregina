@@ -209,6 +209,27 @@ describe('Problem', function() {
 			p.solve()
 			sols = p.solutions
 		})
+		it('there should be one solution', function() {
+			assert(sols.length==1)
+		})
+		it('the solution should lead to B', function() {
+			var sol = sols[0]
+			var C = A.route(sol)
+			assert(equals(C,B))
+		})
+		it('optimum solution is 3 moves', function() {
+			var sol = sols[0]
+			assert(sol.moves.length<=3)
+		})
+	})
+	describe('#solveAll', function() {
+		var sols
+		before(function() {
+			p = new Problem(A,B)
+			p.solveAll(5)
+			sols = p.solutions
+			console.log(sols)
+		})
 		it('there should be at least one solution', function() {
 			assert(sols.length>0)
 		})
@@ -220,10 +241,11 @@ describe('Problem', function() {
 			}
 		})
 		it('optimum solution is 3 moves', function() {
-			for (var i in sols) {
-				var sol = sols[i]
-				assert(sol.moves.length<=3)
-			}
+			var sol = sols[0]
+			assert(sol.moves.length<=3)
+		})
+		it('all solutions are different', function() {
+			assert(!containsDuplicate(sols),'at least one duplicate solution')
 		})
 	})
 })
