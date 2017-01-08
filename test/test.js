@@ -249,3 +249,29 @@ describe('Problem', function() {
 		})
 	})
 })
+
+describe('test helper', function() {
+	describe('containsDuplicate', function() {
+		var array = []
+		it('should return false for a 0 size array', function() {
+			assert(!containsDuplicate(array))
+		})
+		it('should return true if contains duplicates', function() {
+			array.push({'a':'b'})
+			array.push({'e':'f'})
+			array.push({'c':'d'})
+			array.push({'a':'b'})
+			array.push({'a':'b'})
+			assert(containsDuplicate(array))
+		})
+		it('should return false if does not contain duplicate', function() {
+			array = []
+			array.push({'a':'b'})
+			array.push({'e':'f'})
+			array.push({'c':'d'})
+			array.push({'g':'h'})
+			array.push({'i':'j','a':'b'})
+			assert(!containsDuplicate(array))
+		})
+	})
+})
