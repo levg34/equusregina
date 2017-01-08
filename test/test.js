@@ -254,7 +254,6 @@ describe('Problem', function() {
 			p = new Problem(A,B)
 			p.solveAll()
 			sols = p.solutions
-			console.log(sols)
 		})
 		it('there should be at least one solution', function() {
 			assert(sols.length>0)
