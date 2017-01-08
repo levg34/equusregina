@@ -6,6 +6,7 @@ var solutions = document.getElementById('solutions')
 var solution = document.getElementById('solution')
 var viewSolutionsButton = document.getElementById('clickViewSolution')
 var showNextStepButton = document.getElementById('showNextStep')
+var depthInput = document.getElementById('depth')
 var setup = true
 var selectedTool = 'none'
 var selectedSolution = 0
@@ -32,7 +33,8 @@ function changeTool() {
 function clickSolve() {
 	solveButton.setAttribute('hidden','')
 	solveButton.setAttribute('disabled','')
-	p.solve()
+	var depth = depthInput.value
+	p.solveAll(depth)
 	if (solveButton.innerText == 'Solve') {
 		setup = false
 		solveButton.innerText = 'Solve again'
@@ -46,14 +48,13 @@ function clickSolve() {
 		if (p.solutions[i].moves.length<minMoves) {
 			minMoves=p.solutions[i].moves.length
 		}
+		// add solution to solutions view
+		var option = document.createElement('option')
+		option.value = i
+		option.text = 'solution in '+p.solutions[option.value].moves.length+' moves'
+		solution.add(option)
 	}
 	bestSolMoves.innerText = minMoves
-	
-	// add solution to solutions view
-	var option = document.createElement('option')
-	option.value = p.solutions.length-1
-	option.text = 'solution in '+p.solutions[option.value].moves.length+' moves'
-	solution.add(option)
 }
 
 function resetBoard() {
