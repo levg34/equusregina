@@ -30,7 +30,7 @@ function changeTool() {
 }
 
 function clickSolve() {
-	solveButton.setAttribute('hidden','')
+	//solveButton.setAttribute('hidden','')
 	solveButton.setAttribute('disabled','')
 	p.solve()
 	if (solveButton.innerText == 'Solve') {

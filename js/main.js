@@ -16,6 +16,17 @@ function rand(min,max) {
 	return Math.floor(Math.random()*(max-min+1)+min)
 }
 
+// shuffle array
+function shuffle(a) {
+	var j, x, i;
+	for (i = a.length; i; i--) {
+		j = Math.floor(Math.random() * i);
+		x = a[i - 1];
+		a[i - 1] = a[j];
+		a[j] = x;
+	}
+}
+
 // define classes
 
 // A Queue object for queue-like functionality over JavaScript arrays.
@@ -179,6 +190,7 @@ Problem.prototype.solve = function() {
 		}
 		// get all the possible moves
 		var pmoves = C.possibleMoves()
+		shuffle(pmoves)
 		for (var i in pmoves){
 			var pm = pmoves[i]
 			var D = C.move(pm)
