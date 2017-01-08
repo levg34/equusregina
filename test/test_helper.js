@@ -6,12 +6,12 @@ function containsDuplicate(array) {
 		obj[JSON.stringify(array[i])] = array[i]
 	}
 
-	var tot = 0
+	var simplifiedLength = 0
 	for (var i in obj) {
-		tot++
+		simplifiedLength++
 	}
 
 	console.log(obj)
 
-	return length!=tot
+	return length!=simplifiedLength
 }
