@@ -209,8 +209,8 @@ Problem.prototype.solve = function() {
     this.solutions.push(route)
 }
 
-// find all the solutions of depth n
-Problem.prototype.solveAll = function(n) {
+// find all the solutions
+Problem.prototype.solveAll = function() {
 	var C = this.start_pt
 	var visitedPoints = []
 	var queue = new Queue()
@@ -221,7 +221,7 @@ Problem.prototype.solveAll = function(n) {
 	var solutionNodes = []
 
 	var depth = 0
-	while (!queue.isEmpty()&&depth<n) {
+	while (!queue.isEmpty()) {
 		var resC = queue.dequeue()
 		C = resC.point
 		depth = resC.depth

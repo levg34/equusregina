@@ -6,7 +6,6 @@ var solutions = document.getElementById('solutions')
 var solution = document.getElementById('solution')
 var viewSolutionsButton = document.getElementById('clickViewSolution')
 var showNextStepButton = document.getElementById('showNextStep')
-var depthInput = document.getElementById('depth')
 var setup = true
 var selectedTool = 'none'
 var selectedSolution = 0
@@ -33,8 +32,7 @@ function changeTool() {
 function clickSolve() {
 	solveButton.setAttribute('hidden','')
 	solveButton.setAttribute('disabled','')
-	var depth = depthInput.value
-	p.solveAll(depth)
+	p.solveAll()
 	if (solveButton.innerText == 'Solve') {
 		setup = false
 		solveButton.innerText = 'Solve again'

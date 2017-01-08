@@ -21,6 +21,32 @@ function init() {
 	p = new Problem(A,B)
 }
 
+describe('test helper', function() {
+	describe('containsDuplicate', function() {
+		var array = []
+		it('should return false for a 0 size array', function() {
+			assert(!containsDuplicate(array))
+		})
+		it('should return true if contains duplicates', function() {
+			array.push({'a':'b'})
+			array.push({'e':'f'})
+			array.push({'c':'d'})
+			array.push({'a':'b'})
+			array.push({'a':'b'})
+			assert(containsDuplicate(array))
+		})
+		it('should return false if does not contain duplicate', function() {
+			array = []
+			array.push({'a':'b'})
+			array.push({'e':'f'})
+			array.push({'c':'d'})
+			array.push({'g':'h'})
+			array.push({'i':'j','a':'b'})
+			assert(!containsDuplicate(array))
+		})
+	})
+})
+
 describe('equals()', function() {
 	describe('Objects', function() {
 		it('equal objects should be equal', function() {
@@ -226,7 +252,7 @@ describe('Problem', function() {
 		var sols
 		before(function() {
 			p = new Problem(A,B)
-			p.solveAll(5)
+			p.solveAll()
 			sols = p.solutions
 			console.log(sols)
 		})
@@ -246,32 +272,6 @@ describe('Problem', function() {
 		})
 		it('all solutions are different', function() {
 			assert(!containsDuplicate(sols),'at least one duplicate solution')
-		})
-	})
-})
-
-describe('test helper', function() {
-	describe('containsDuplicate', function() {
-		var array = []
-		it('should return false for a 0 size array', function() {
-			assert(!containsDuplicate(array))
-		})
-		it('should return true if contains duplicates', function() {
-			array.push({'a':'b'})
-			array.push({'e':'f'})
-			array.push({'c':'d'})
-			array.push({'a':'b'})
-			array.push({'a':'b'})
-			assert(containsDuplicate(array))
-		})
-		it('should return false if does not contain duplicate', function() {
-			array = []
-			array.push({'a':'b'})
-			array.push({'e':'f'})
-			array.push({'c':'d'})
-			array.push({'g':'h'})
-			array.push({'i':'j','a':'b'})
-			assert(!containsDuplicate(array))
 		})
 	})
 })
