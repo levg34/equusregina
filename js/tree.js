@@ -62,6 +62,7 @@ Tree.prototype.add = function(data, toData, traversal) {
 	if (parent) {
 		parent.children.push(child);
 		child.parent = parent;
+		return child
 	} else {
 		throw new Error('Cannot add node to a non-existent parent.');
 	}

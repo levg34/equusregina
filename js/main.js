@@ -211,6 +211,56 @@ Problem.prototype.solve = function() {
 
 // find all the solutions of depth n
 Problem.prototype.solveAll = function(n) {
-	// TODO: implement
-	// we need to fix a max depth
+	var route = new Route()
+	var C = this.start_pt
+	var visitedPoints = []
+	var queue = new Queue()
+	queue.enqueue({point:C,depth:0})
+	visitedPoints.push(C)
+
+	var tree = new Tree(C)
+	var solutionNodes = []
+
+	var depth = 0
+	while (!queue.isEmpty()&&depth<n) {
+		var resC = queue.dequeue()
+		C = resC.point
+		depth = resC.depth
+		var node
+		if (resC.parent) {
+			node = tree.add(C,resC.parent,tree.traverseBF)
+		}
+		if (equals(this.arr_pt,C)) {
+			solutionNodes.push(node)
+		}
+		// get all the possible moves
+		var pmoves = C.possibleMoves()
+		for (var i in pmoves){
+			var pm = pmoves[i]
+			var D = C.move(pm)
+			if (visitedPoints.filter(function(P){ return equals(P,D) }).length==0) {
+				queue.enqueue({point:D,parent:C,depth:depth+1})
+				if (!equals(D,this.arr_pt)) visitedPoints.push(D)
+			}
+		}
+	}
+
+	for (var i in solutionNodes) {
+		var leafB = solutionNodes[i]
+		var pointsList = []
+		pointsList.push(leafB.data)
+
+		while(leafB.parent) {
+			pointsList.push(leafB.parent.data)
+			leafB = leafB.parent
+		}
+
+		pointsList.reverse()
+
+		for (var i=0;i<pointsList.length-1;++i) {
+			route.addMove(pointsList[i+1].diff(pointsList[i]))
+		}
+
+		this.solutions.push(route)
+	}
 }
